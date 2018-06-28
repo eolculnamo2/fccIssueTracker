@@ -1,11 +1,24 @@
 import React from 'react'
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route, withRouter } from 'react-router-dom'
+import { connect } from  'react-redux'
+import { bindActionCreators } from 'redux'
+import { setTicketData } from '../redux/reducers/ticketReducer'
 import './scss/main.scss'
 import Home from './components/Home/Home'
 import NewTicket from './components/NewTicket/NewTicket'
 import ViewTickets from './components/ViewTickets/ViewTickets'
 
 class App extends React.Component {
+    componentWillMount() {
+        fetch('/api/issues/apitestproject')
+       .then( res => {
+           return res.json()
+       })
+       .then( data => {
+           this.props.setTicketData(data)
+           console.log(JSON.stringify(this.props.ticketData,null,3))
+       }) 
+   }
     render(){
         return(
             <div>
@@ -24,4 +37,18 @@ class App extends React.Component {
     }
 }
 
-export default App
+const mapStateToProps = state => {
+    return {
+        ticketData: state.ticketReducer.ticketData
+    }
+} 
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      setTicketData
+    },
+    dispatch
+  );
+  
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

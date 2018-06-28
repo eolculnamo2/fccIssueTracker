@@ -21,7 +21,7 @@ class NewTicket extends React.Component {
     render() {
         return(
             <div>
-                <form>
+                <form className="new-ticket-form">
                     <label>
                     <h4>Title</h4>
                     </label>
@@ -61,7 +61,7 @@ class NewTicket extends React.Component {
 
                 </form>
 
-                <button onClick={this.submitForm.bind(this)}>
+                <button className="form-button" onClick={this.submitForm.bind(this)}>
                     Submit
                 </button>
             </div>

@@ -5,21 +5,50 @@ import { setTicketData } from '../../../../redux/reducers/ticketReducer'
 import '../../../scss/main.scss'
 
 class Ticket extends React.Component {
-    componentWillMount() {
-         fetch('/api/issues/apitestproject')
-        .then( res => {
-            return res.json()
-        })
-        .then( data => {
-            this.props.setTicketData(data)
-            console.log(JSON.stringify(this.props.ticketData,null,3))
-        }) 
-    }
     render() {
         return (
             <div className='ticket-box'>
-                {this.props.ticketData.forEach((x)=>{
-                    return (<p>{x['issue_title']}</p>)
+                {this.props.ticketData.map((x,i)=>{
+                    return (
+                    <div className="a-ticket">
+                        <div className="ticket-header">
+                            <div>
+                                {x['issue_title']}
+                            </div>
+                            <div> 
+                            {x['open'] == true ? 'Open' : 'Closed'} 
+                            </div>
+                        </div>
+                        <div className="ticket-info">
+                            <div>  
+                                Created On: <span>{x['created_on']}</span>
+                            </div>
+                            <div>
+                                Updated On: <span>{x['updated_on']}</span>
+                            </div>
+                        </div>
+                        <div className="ticket-info">
+                            <div>  
+                                Created By: <span>{x['created_by']}</span>
+                            </div>
+                            <div>
+                                Assigned To: <span>{x['assigned_to']}</span>
+                            </div>
+                        </div>
+                        <div className="ticket-info">
+                            <div>  
+                                Status: <span>{x['open'] == true ? 'Open' : 'Closed'}</span>
+                            </div>
+                        </div>
+                        <div className="ticket-status-text ticket-status-text--issue">
+                            Issue Text:<br/><br/>
+                            <span>{x['issue_text']}</span>
+                        </div>
+                        <div className="ticket-status-text">
+                            Status Text:<br/><br/>
+                            <span>{x['status_text']}</span>
+                        </div>
+                    </div>)
                 })}
             </div>
         )
@@ -27,7 +56,6 @@ class Ticket extends React.Component {
 }
 
 const mapStateToProps = state => {
-    alert(JSON.stringify('state'+JSON.stringify(state)))
     return {
         ticketData: state.ticketReducer.ticketData
     }

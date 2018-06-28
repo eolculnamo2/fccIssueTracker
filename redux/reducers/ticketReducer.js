@@ -1,5 +1,4 @@
 export const SETTICKETDATA = 'ticketReducer/SETTICKETDATA'
-import store from '../store'
 
 let initialState = {
     ticketData: []
@@ -7,7 +6,7 @@ let initialState = {
 
 export default (state = initialState, action) => {
     switch(action.type) {
-        case "SETTICKETDATA":
+        case SETTICKETDATA:
         return {
             ...state,
             ticketData: action.payload
@@ -17,7 +16,9 @@ export default (state = initialState, action) => {
     }
 };
 
-//action
-export const setTicketData = () => {
-    store.dispatch({type: "SETTICKETDATA", payload: "data"})
+
+export const setTicketData = data => {
+   return dispatch =>{
+        dispatch({type: SETTICKETDATA, payload: data})
+   }
 }

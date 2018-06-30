@@ -30,12 +30,12 @@ export const setTicketData = data => {
 }
 
 export const getTicketData = () => {
-
+    // returning dispatch is part of thunk
+    return dispatch => {
     fetch('/api/issues/apitestproject')
     .then( res => res.json())
-    .then( data => {
-        return dispatch => {
+    .then( data => {     
             dispatch({type: GET_TICKET_DATA, payload: data})
-        } 
-    })    
+        })    
+    }
 }

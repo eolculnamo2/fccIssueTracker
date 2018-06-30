@@ -71,17 +71,16 @@ class Ticket extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
+const mapStateToProps = state => ({
         ticketData: state.ticketReducer.ticketData
-    }
-} 
+    })
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      getTicketData
-    },
-    dispatch
-  );
+const mapDispatchToProps = dispatch =>{
+    return bindActionCreators(
+        {
+            getTicketData
+        },
+        dispatch
+    )}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Ticket)

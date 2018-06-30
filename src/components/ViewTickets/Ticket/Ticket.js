@@ -1,25 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { setTicketData } from '../../../../redux/reducers/ticketReducer'
+import { setTicketData, getTicketData } from '../../../../redux/reducers/ticketReducer'
 import '../../../scss/main.scss'
 
 class Ticket extends React.Component {
-    button(open){
-        if (open) {
-            return (
-                <button className="close-button">
-                    Close
-                </button>
-            )
-        }
-        else {
-            return (
-                <button className='reopen-button'>
-                    Reopen
-                </button>
-            )
-        }
+    changeStatus(x) {
+        fetch('/api/issues/change-ticket-status',{
+            method: "POST",
+            body: JSON.stringify(x),
+            headers: { "Content-Type": "application/json" }
+          })
+        .then( () => {
+            this.props.getTicketData()
+        })
     }
     render() {
         return (
@@ -65,7 +59,10 @@ class Ticket extends React.Component {
                             <span>{x['status_text']}</span>
                         </div>
                         <div className="button-wrap">
-                            {this.button(x['open'])}
+                            <button onClick={this.changeStatus.bind(this, x)}
+                                className={x.open === true ? 'close-button' : 'reopen-button'}>
+                                {x.open === true ? 'Close' : 'Reopen'}
+                            </button>
                         </div>
                     </div>)
                 })}
@@ -83,7 +80,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      setTicketData
+      getTicketData
     },
     dispatch
   );

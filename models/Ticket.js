@@ -11,6 +11,7 @@ mongoose.connection.once('open',()=>{
     });
 
 let Ticket = new Schema({
+    id: Number,
     issue_title: String,
     issue_text: String,
     created_on: String,

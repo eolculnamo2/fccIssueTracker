@@ -12,4 +12,12 @@ router.get('/issues/apitestproject',(req,res) => {
     })
 })
 
+router.post('/issues/change-ticket-status',(req,res) => {
+    let update = req.body.open === true ? false : true
+
+     Ticket.findOneAndUpdate({_id: req.body['_id']},{$set: {open: update}}, (err,result) => {
+        return res.send(result)
+    }) 
+})
+
 module.exports = router

@@ -16,7 +16,6 @@ class App extends React.Component {
        })
        .then( data => {
            this.props.setTicketData(data)
-           console.log(JSON.stringify(this.props.ticketData,null,3))
        }) 
    }
     render(){

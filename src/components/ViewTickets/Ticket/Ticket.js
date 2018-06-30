@@ -5,12 +5,28 @@ import { setTicketData } from '../../../../redux/reducers/ticketReducer'
 import '../../../scss/main.scss'
 
 class Ticket extends React.Component {
+    button(open){
+        if (open) {
+            return (
+                <button className="close-button">
+                    Close
+                </button>
+            )
+        }
+        else {
+            return (
+                <button className='reopen-button'>
+                    Reopen
+                </button>
+            )
+        }
+    }
     render() {
         return (
             <div className='ticket-box'>
                 {this.props.ticketData.map((x,i)=>{
                     return (
-                    <div className="a-ticket">
+                    <div className={x['open'] ? "a-ticket" : "a-ticket a-ticket--closed"}>
                         <div className="ticket-header">
                             <div>
                                 {x['issue_title']}
@@ -47,6 +63,9 @@ class Ticket extends React.Component {
                         <div className="ticket-status-text">
                             Status Text:<br/><br/>
                             <span>{x['status_text']}</span>
+                        </div>
+                        <div className="button-wrap">
+                            {this.button(x['open'])}
                         </div>
                     </div>)
                 })}

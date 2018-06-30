@@ -6,9 +6,14 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-a, a:active, a:hover, a:visited {
-    color: inherit;
+a, a:active, a:visited {
+    color: $dark-green;
     text-decoration: none;
+}
+
+a:hover {
+    color: $light-blue;
+    text-decoration: underline;
 }
 
 //default inputs
@@ -63,6 +68,10 @@ header {
 .a-ticket {
     margin: 30px 0;
     border: 1px solid #333;
+
+    &--closed {
+        background: $closed-color;
+    }
 }
 
 .ticket-header {
@@ -108,4 +117,28 @@ header {
     font-size: 16px;
     border-radius: 3px;
     border: 0;
+}
+
+.button-wrap {
+    button {
+        display: block;
+        padding: 7px 10px;
+        border: 0;
+        font-size: 14px;
+        cursor: pointer;
+        margin: 10px auto;
+        border-radius: 3px;
+
+        &:hover {
+            opacity: .7;
+        }
+    }
+    
+    .close-button {
+        background: $danger-red;
+    }
+
+    .reopen-button {
+        background: $light-gray;
+    }
 }

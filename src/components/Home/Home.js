@@ -6,7 +6,7 @@ class Home extends React.Component {
         return(
             <div className="home-page-box">
                 <h1>
-                    Free Code Camp Issue Tracker Projcet
+                    Free Code Camp Issue Tracker Project
                 </h1>
                 <em>Functionally similar to https://protective-garage.glitch.me/ </em>
                 <p>

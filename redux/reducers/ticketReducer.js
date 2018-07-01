@@ -35,6 +35,9 @@ export const getTicketData = () => {
     fetch('/api/issues/apitestproject')
     .then( res => res.json())
     .then( data => {     
+            let x = data.sort((a,b) => {
+                return new Date(b['updated_on']) - new Date(a['updated_on'])
+            })
             dispatch({type: GET_TICKET_DATA, payload: data})
         })    
     }

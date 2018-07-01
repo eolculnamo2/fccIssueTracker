@@ -2,10 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { setTicketData, getTicketData } from '../../../../redux/reducers/ticketReducer'
+import moment from 'moment'
 import '../../../scss/main.scss'
 
 class Ticket extends React.Component {
-    changeStatus(x) {
+
+    changeStatus(x, target, newValue) {
+        x.target = target
+        x.newValue = newValue
+
         fetch('/api/issues/change-ticket-status',{
             method: "POST",
             body: JSON.stringify(x),
@@ -15,6 +20,7 @@ class Ticket extends React.Component {
             this.props.getTicketData()
         })
     }
+    
     render() {
         return (
             <div className='ticket-box'>
@@ -31,10 +37,12 @@ class Ticket extends React.Component {
                         </div>
                         <div className="ticket-info">
                             <div>  
-                                Created On: <span>{x['created_on']}</span>
+                                Created On: <span>{
+                                    moment(x['created_on']).format('MMMM Do YYYY, h:mm:ss a')}</span>
                             </div>
                             <div>
-                                Updated On: <span>{x['updated_on']}</span>
+                                Updated On: <span>{
+                                     moment(x['updated_on']).format('MMMM Do YYYY, h:mm:ss a')}</span>
                             </div>
                         </div>
                         <div className="ticket-info">
@@ -59,7 +67,7 @@ class Ticket extends React.Component {
                             <span>{x['status_text']}</span>
                         </div>
                         <div className="button-wrap">
-                            <button onClick={this.changeStatus.bind(this, x)}
+                            <button onClick={this.changeStatus.bind(this, x, "open", x.open === true ? false : true)}
                                 className={x.open === true ? 'close-button' : 'reopen-button'}>
                                 {x.open === true ? 'Close' : 'Reopen'}
                             </button>

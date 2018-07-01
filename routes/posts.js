@@ -1,7 +1,6 @@
 const express = require('express')
 const Ticket = require('../models/Ticket')
 const bodyParser = require('body-parser')
-const moment = require('moment')
 const router = express.Router()
 
 router.use(bodyParser.json());
@@ -9,7 +8,7 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 router.post('/newTicket',(req,res) => {
     let info = req.body
-    let now = moment().format('MMMM Do YYYY, h:mm:ss a')
+    let now = new Date()
 
     new Ticket ({
         issue_title: info.title,

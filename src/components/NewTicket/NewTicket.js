@@ -1,4 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getTicketData } from  '../../../redux/reducers/ticketReducer'
 
 class NewTicket extends React.Component {
     submitForm() {
@@ -16,6 +19,10 @@ class NewTicket extends React.Component {
                 method: "POST",
                 body: JSON.stringify(payload),
                 headers: { "Content-Type": "application/json" }
+                })
+                .then( () => {
+                    this.props.getTicketData()
+                    alert("New Ticket Added. Click View Tickets to see your Ticket.")
                 })
     }
     render() {
@@ -69,4 +76,16 @@ class NewTicket extends React.Component {
     }
 }
 
-export default NewTicket
+const mapStateToProps = state => ({
+    ticketData: state.ticketReducer.ticketData
+})
+
+const mapDispatchToProps = dispatch =>{
+return bindActionCreators(
+    {
+        getTicketData
+    },
+    dispatch
+)}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewTicket)

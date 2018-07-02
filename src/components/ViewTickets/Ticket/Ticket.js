@@ -1,11 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { setTicketData, getTicketData } from '../../../../redux/reducers/ticketReducer'
-import moment from 'moment'
-import '../../../scss/main.scss'
+import { getTicketData, updateTicketState } from '../../../../redux/reducers/ticketReducer'
+import EditTicket from './EditTicket/EditTicket'
+import StaticTicket from './StaticTicket/StaticTicket'
 
 class Ticket extends React.Component {
+    constructor() {
+        super()
+        this.changeStatus = this.changeStatus.bind(this)
+        this.updateTicket = this.updateTicket.bind(this)
+    }
+
+    updateTicket(edit,index) {
+        this.props.updateTicketState(edit,index)
+    }
 
     changeStatus(x, target, newValue) {
         x.target = target
@@ -22,71 +31,42 @@ class Ticket extends React.Component {
     }
     
     render() {
-        return (
+        return(
             <div className='ticket-box'>
                 {this.props.ticketData.map((x,i)=>{
-                    return (
-                    <div className={x['open'] ? "a-ticket" : "a-ticket a-ticket--closed"}>
-                        <div className="ticket-header">
-                            <div>
-                                {x['issue_title']}
-                            </div>
-                            <div> 
-                            {x['open'] == true ? 'Open' : 'Closed'} 
-                            </div>
-                        </div>
-                        <div className="ticket-info">
-                            <div>  
-                                Created On: <span>{
-                                    moment(x['created_on']).format('MMMM Do YYYY, h:mm:ss a')}</span>
-                            </div>
-                            <div>
-                                Updated On: <span>{
-                                     moment(x['updated_on']).format('MMMM Do YYYY, h:mm:ss a')}</span>
-                            </div>
-                        </div>
-                        <div className="ticket-info">
-                            <div>  
-                                Created By: <span>{x['created_by']}</span>
-                            </div>
-                            <div>
-                                Assigned To: <span>{x['assigned_to']}</span>
-                            </div>
-                        </div>
-                        <div className="ticket-info">
-                            <div>  
-                                Status: <span>{x['open'] == true ? 'Open' : 'Closed'}</span>
-                            </div>
-                        </div>
-                        <div className="ticket-status-text ticket-status-text--issue">
-                            Issue Text:<br/><br/>
-                            <span>{x['issue_text']}</span>
-                        </div>
-                        <div className="ticket-status-text">
-                            Status Text:<br/><br/>
-                            <span>{x['status_text']}</span>
-                        </div>
-                        <div className="button-wrap">
-                            <button onClick={this.changeStatus.bind(this, x, "open", x.open === true ? false : true)}
-                                className={x.open === true ? 'close-button' : 'reopen-button'}>
-                                {x.open === true ? 'Close' : 'Reopen'}
-                            </button>
-                        </div>
-                    </div>)
+                    if (this.props.ticketStatus[i]) {
+                        return (
+                            <StaticTicket data ={x}
+                                          changeStatus={this.changeStatus}
+                                          updateTicket={this.updateTicket}
+                                          index={i}
+                                          status={true}/>
+                        )       
+                    }
+                    else {
+                        return (
+                            <EditTicket data ={x}
+                                        changeStatus={this.changeStatus}
+                                        updateTicket={this.updateTicket}
+                                        index={i}
+                                        status={false}/>
+                        ) 
+                    }
                 })}
             </div>
         )
     }
 }
-
 const mapStateToProps = state => ({
-        ticketData: state.ticketReducer.ticketData
+        ticketData: state.ticketReducer.ticketData,
+        ticketStatus: state.ticketReducer.ticketStatus
     })
 
 const mapDispatchToProps = dispatch =>{
     return bindActionCreators(
         {
-            getTicketData
+            getTicketData,
+            updateTicketState
         },
         dispatch
     )}

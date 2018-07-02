@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Link, Route, withRouter } from 'react-router-dom'
 import { connect } from  'react-redux'
 import { bindActionCreators } from 'redux'
-import { setTicketData } from '../redux/reducers/ticketReducer'
+import { setTicketData, updateTicketState } from '../redux/reducers/ticketReducer'
 import './scss/main.scss'
 import Home from './components/Home/Home'
 import NewTicket from './components/NewTicket/NewTicket'
@@ -16,6 +16,7 @@ class App extends React.Component {
        })
        .then( data => {
            this.props.setTicketData(data)
+           this.props.updateTicketState()
        }) 
    }
     render(){
@@ -45,7 +46,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      setTicketData
+      setTicketData,
+      updateTicketState
     },
     dispatch
   );

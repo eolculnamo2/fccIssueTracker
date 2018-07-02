@@ -1,8 +1,11 @@
 export const SETTICKETDATA = 'ticketReducer/SETTICKETDATA'
 export const GET_TICKET_DATA = 'ticketReducer/GET_TICKET_DATA'
+export const UPDATE_TICKET_STATE = 'ticketReducer/UPDATE_TICKET_STATE'
+
 
 let initialState = {
-    ticketData: []
+    ticketData: [],
+    ticketStatus: []
 }
 
 export default (state = initialState, action) => {
@@ -17,6 +20,11 @@ export default (state = initialState, action) => {
             ...state,
             ticketData: action.payload
         }
+        case UPDATE_TICKET_STATE:
+        return {
+            ...state,
+            ticketStatus: action.payload
+        }
         default:
         return state;
     }
@@ -30,7 +38,6 @@ export const setTicketData = data => {
 }
 
 export const getTicketData = () => {
-    // returning dispatch is part of thunk
     return dispatch => {
     fetch('/api/issues/apitestproject')
     .then( res => res.json())
@@ -40,5 +47,21 @@ export const getTicketData = () => {
             })
             dispatch({type: GET_TICKET_DATA, payload: data})
         })    
+    }
+}
+
+export const updateTicketState = (status,index) => {
+    return (dispatch, getState) => {
+        console.log(JSON.stringify(getState().ticketReducer))
+      let st = getState().ticketReducer
+      let data = st.ticketData.map((x,i) => {
+          if (status !== undefined && index !== undefined) {
+            return i === index ? status : true
+          }
+          else {
+              return true
+          }
+      })
+      dispatch({type: UPDATE_TICKET_STATE, payload: data})
     }
 }

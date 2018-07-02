@@ -120,13 +120,16 @@ header {
 }
 
 .button-wrap {
+    display: flex;
+    justify-content: space-around;
+
     button {
         display: block;
         padding: 7px 10px;
         border: 0;
         font-size: 14px;
         cursor: pointer;
-        margin: 10px auto;
+        margin: 10px;
         border-radius: 3px;
 
         &:hover {
@@ -141,4 +144,12 @@ header {
     .reopen-button {
         background: $light-gray;
     }
+    
+    .edit-button {
+        background: $open-green;
+    }
+}
+
+#new-status-text {
+    width: 100%;
 }

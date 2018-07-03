@@ -8,8 +8,29 @@ import StaticTicket from './StaticTicket/StaticTicket'
 class Ticket extends React.Component {
     constructor() {
         super()
+        this.submitChanges = this.submitChanges.bind(this)
         this.changeStatus = this.changeStatus.bind(this)
         this.updateTicket = this.updateTicket.bind(this)
+    }
+
+    submitChanges(id,index) {
+        let payload = {
+            id: id,
+            assignedTo: document.getElementById('new-assigned-to').value,
+            open: document.getElementById('open').value,
+            newStatus: document.getElementById('new-status-text').value
+        }
+
+        fetch('/api/issues/submit-changes',{
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: { "Content-Type": "application/json" }
+          })
+        .then( () => {
+            this.props.getTicketData()
+            this.updateTicket(true, index)
+        })
+        
     }
 
     updateTicket(edit,index) {
@@ -40,15 +61,18 @@ class Ticket extends React.Component {
                                           changeStatus={this.changeStatus}
                                           updateTicket={this.updateTicket}
                                           index={i}
+                                          id={x['_id']}
                                           status={true}/>
                         )       
                     }
                     else {
                         return (
                             <EditTicket data ={x}
+                                        submitChanges={this.submitChanges}
                                         changeStatus={this.changeStatus}
                                         updateTicket={this.updateTicket}
                                         index={i}
+                                        id={x['_id']}
                                         status={false}/>
                         ) 
                     }

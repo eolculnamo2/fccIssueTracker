@@ -52,7 +52,6 @@ export const getTicketData = () => {
 
 export const updateTicketState = (status,index) => {
     return (dispatch, getState) => {
-        console.log(JSON.stringify(getState().ticketReducer))
       let st = getState().ticketReducer
       let data = st.ticketData.map((x,i) => {
           if (status !== undefined && index !== undefined) {

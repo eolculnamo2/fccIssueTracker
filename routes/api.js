@@ -13,6 +13,21 @@ router.get('/issues/apitestproject',(req,res) => {
     })
 })
 
+router.post('/issues/submit-changes',(req,res) => {
+    Ticket.findOneAndUpdate({_id: req.body.id},
+    {$set: 
+            {
+                'assigned_to': req.body.assignedTo,
+                'open': req.body.open,
+                'status_text':req.body.newStatus,
+                'updated_on': new Date()
+            }
+    },
+    (err, response) => {
+        err ? console.log("Submit Changes Error") : res.send("changes saved")
+    })
+})
+
 router.post('/issues/change-ticket-status',(req,res) => {
     let target = req.body.target
     let update = req.body.newValue

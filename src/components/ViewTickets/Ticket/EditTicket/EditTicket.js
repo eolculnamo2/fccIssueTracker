@@ -33,7 +33,7 @@ const EditTicket = (props) => {
             </div>
             <div className="ticket-info">
                 <div>  
-                    Status: <select id ="new-status">
+                    Status: <select id ="open">
                                 <option value={true}>
                                     Open
                                 </option>
@@ -52,11 +52,11 @@ const EditTicket = (props) => {
                 <textarea id="new-status-text"/>
             </div>
             <div className="button-wrap">
-                <button onClick={props.changeStatus.bind(this, props.data, "open", props.data.open === true ? false : true)}
+                <button onClick={props.changeStatus.bind(this,props.data, "open", props.data.open === true ? false : true)}
                     className={props.data.open === true ? 'close-button' : 'reopen-button'}>
                     {props.data.open === true ? 'Close' : 'Reopen'}
                 </button>
-                <button onClick={props.updateTicket.bind(this,true,props.index)}
+                <button onClick={props.submitChanges.bind(this,props.id,props.index)}
                         className={'edit-button'}>
                         Save Ticket
                 </button>

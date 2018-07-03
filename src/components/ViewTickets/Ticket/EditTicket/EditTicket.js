@@ -52,6 +52,10 @@ const EditTicket = (props) => {
                 <textarea id="new-status-text"/>
             </div>
             <div className="button-wrap">
+            <button onClick={props.deleteTicket.bind(this,props.id)}
+                        className={'close-button'}>
+                        Delete Ticket
+                </button>
                 <button onClick={props.changeStatus.bind(this,props.data, "open", props.data.open === true ? false : true)}
                     className={props.data.open === true ? 'close-button' : 'reopen-button'}>
                     {props.data.open === true ? 'Close' : 'Reopen'}

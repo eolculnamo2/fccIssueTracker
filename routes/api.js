@@ -72,4 +72,10 @@ router.post('/issues/change-ticket-status',(req,res) => {
     }
 })
 
+router.post('/issues/delete-ticket',(req,res) => {
+    Ticket.findByIdAndRemove(req.body.id, (err,response) => {
+        res.send('deleted')
+    })
+})
+
 module.exports = router

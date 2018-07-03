@@ -11,6 +11,7 @@ class Ticket extends React.Component {
         this.submitChanges = this.submitChanges.bind(this)
         this.changeStatus = this.changeStatus.bind(this)
         this.updateTicket = this.updateTicket.bind(this)
+        this.deleteTicket = this.deleteTicket.bind(this)
     }
 
     submitChanges(id,index) {
@@ -50,6 +51,20 @@ class Ticket extends React.Component {
             this.props.getTicketData()
         })
     }
+
+    deleteTicket(id) {
+        let payload = {
+            id: id
+        }
+        fetch('/api/issues/delete-ticket',{
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: { "Content-Type": "application/json" }
+          })
+        .then( () => {
+            this.props.getTicketData()
+        })
+    }
     
     render() {
         return(
@@ -68,6 +83,7 @@ class Ticket extends React.Component {
                     else {
                         return (
                             <EditTicket data ={x}
+                                        deleteTicket={this.deleteTicket}
                                         submitChanges={this.submitChanges}
                                         changeStatus={this.changeStatus}
                                         updateTicket={this.updateTicket}

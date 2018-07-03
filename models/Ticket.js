@@ -4,9 +4,9 @@ const uri = process.env.DB
 
 mongoose.connect(uri);
 
-mongoose.connection.once('open',()=>{
+mongoose.connection.once('open',() => {
     console.log("Connected to Mongo via Mongoose")
-    }).on('error',(err)=>{
+    }).on('error',(err) => {
       console.log("Connection Error: " + err)
     });
 

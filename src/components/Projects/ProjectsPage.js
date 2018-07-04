@@ -11,29 +11,34 @@ class ProjectsPage extends React.Component {
     }
     render() {
         return(
-            <div className="projects-container">
-                {this.props.projectData.map( project => {
-                        return (
-                            <div className="project">
-                                <h2>
-                                    {project.project_name}
-                                </h2>
-                                <p>
-                                    Organization: {project.organization}
-                                </p>
-                                <em>
-                                    Created By: {project.created_by} on {moment(project.created_on).format('MMMM Do YYYY')}
-                                </em>
-                                <div className='button-wrap'>
-                                    <button onClick={this.goToTickets.bind(this,project.project_name)}
-                                    className='edit-button'>
-                                        View Tickets
-                                    </button>
+            <div>
+                <h2 className="page-heading">
+                    Project
+                </h2>
+                <div className="projects-container">
+                    {this.props.projectData.map( project => {
+                            return (
+                                <div className="project">
+                                    <h2>
+                                        {project.project_name}
+                                    </h2>
+                                    <p>
+                                        Organization: {project.organization}
+                                    </p>
+                                    <em>
+                                        Created By: {project.created_by} on {moment(project.created_on).format('MMMM Do YYYY')}
+                                    </em>
+                                    <div className='button-wrap'>
+                                        <button onClick={this.goToTickets.bind(this,project.project_name)}
+                                        className='edit-button'>
+                                            View Tickets
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })             
-                }
+                            )
+                        })             
+                    }
+                </div>
             </div>
         )
     }

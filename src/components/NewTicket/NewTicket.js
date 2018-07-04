@@ -23,12 +23,15 @@ class NewTicket extends React.Component {
                 })
                 .then( () => {
                     this.props.getTicketData()
-                    alert("New Ticket Added. Click View Tickets to see your Ticket.")
+                    alert("New Ticket Added. Click View Projects and select your project to see your Ticket.")
                 })
     }
     render() {
         return(
             <div>
+                <h2 className="page-heading">
+                    New Ticket
+                </h2>
                 <form className="new-ticket-form">
                     <label>
                         <h4>Project Name</h4>

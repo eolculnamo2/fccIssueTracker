@@ -69,7 +69,11 @@ class Ticket extends React.Component {
     render() {
         return(
             <div className = "view-tickets-box">
+             <h2 className="page-heading">
+                {this.props.match.params.str + ' Tickets'}
+            </h2>
                 <div className='ticket-box'>
+                   
                     {this.props.ticketData.map((x,i) => {
                         if(x.project_name.toLowerCase() == this.props.match.params.str.toLowerCase()) {
                             if (this.props.ticketStatus[i]) {

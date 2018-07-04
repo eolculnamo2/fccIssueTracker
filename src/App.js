@@ -30,7 +30,7 @@ class App extends React.Component {
                         <Link to='/'><span>Home</span></Link>
                         <Link to='/new-project'><span>New Project</span></Link>
                         <Link to='/new-ticket'><span>New Ticket</span></Link>
-                        <Link to='/view-tickets'><span>View Tickets</span></Link>
+                        <Link to='/view-tickets'><span>View Projects</span></Link>
                     </div>
                 </header>
                 <Route exact path='/' component={Home} />

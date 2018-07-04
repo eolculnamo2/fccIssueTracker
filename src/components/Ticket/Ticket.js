@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getTicketData, updateTicketState } from '../../../../redux/reducers/ticketReducer'
+import { getTicketData, updateTicketState } from '../../../redux/reducers/ticketReducer'
 import EditTicket from './EditTicket/EditTicket'
 import StaticTicket from './StaticTicket/StaticTicket'
 
@@ -68,31 +68,35 @@ class Ticket extends React.Component {
     
     render() {
         return(
-            <div className='ticket-box'>
-                {this.props.ticketData.map((x,i)=>{
-                    if (this.props.ticketStatus[i]) {
-                        return (
-                            <StaticTicket data ={x}
-                                          changeStatus={this.changeStatus}
-                                          updateTicket={this.updateTicket}
-                                          index={i}
-                                          id={x['_id']}
-                                          status={true}/>
-                        )       
-                    }
-                    else {
-                        return (
-                            <EditTicket data ={x}
-                                        deleteTicket={this.deleteTicket}
-                                        submitChanges={this.submitChanges}
-                                        changeStatus={this.changeStatus}
-                                        updateTicket={this.updateTicket}
-                                        index={i}
-                                        id={x['_id']}
-                                        status={false}/>
-                        ) 
-                    }
-                })}
+            <div className = "view-tickets-box">
+                <div className='ticket-box'>
+                    {this.props.ticketData.map((x,i) => {
+                        if(x.project_name.toLowerCase() == this.props.match.params.str.toLowerCase()) {
+                            if (this.props.ticketStatus[i]) {
+                                return (
+                                    <StaticTicket data ={x}
+                                                changeStatus={this.changeStatus}
+                                                updateTicket={this.updateTicket}
+                                                index={i}
+                                                id={x['_id']}
+                                                status={true}/>
+                                )       
+                            }
+                            else {
+                                return (
+                                    <EditTicket data ={x}
+                                                deleteTicket={this.deleteTicket}
+                                                submitChanges={this.submitChanges}
+                                                changeStatus={this.changeStatus}
+                                                updateTicket={this.updateTicket}
+                                                index={i}
+                                                id={x['_id']}
+                                                status={false}/>
+                                ) 
+                            }
+                        }
+                    })}
+                </div>
             </div>
         )
     }

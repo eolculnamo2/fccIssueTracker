@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import '../../../../scss/main.scss'
+import '../../../scss/main.scss'
 
 const EditTicket = (props) => {
     return (
@@ -59,6 +59,10 @@ const EditTicket = (props) => {
                 <button onClick={props.changeStatus.bind(this,props.data, "open", props.data.open === true ? false : true)}
                     className={props.data.open === true ? 'close-button' : 'reopen-button'}>
                     {props.data.open === true ? 'Close' : 'Reopen'}
+                </button>
+                <button onClick={props.updateTicket.bind(this,true,props.index)}
+                className="back-button">
+                    Back
                 </button>
                 <button onClick={props.submitChanges.bind(this,props.id,props.index)}
                         className={'edit-button'}>

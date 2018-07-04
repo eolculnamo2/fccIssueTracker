@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import '../../../../scss/main.scss'
+import '../../../scss/main.scss'
 //props.data['key']
 const StaticTicket = (props) => {
         return (

@@ -2,12 +2,20 @@ const express = require('express')
 const router = express.Router()
 const bodyParser = require('body-parser')
 const Ticket = require('../models/Ticket')
+const Project = require('../models/Project')
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 
 router.get('/issues/apitestproject',(req,res) => {
     Ticket.find({}, (err,result)=>{
+        return res.header("Content-Type",'application/json')
+                  .send(JSON.stringify(result, null, 3))
+    })
+})
+
+router.get('/issues/all-projects',(req,res) => {
+    Project.find({}, (err,result)=>{
         return res.header("Content-Type",'application/json')
                   .send(JSON.stringify(result, null, 3))
     })

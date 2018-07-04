@@ -1,5 +1,6 @@
 const express = require('express')
 const Ticket = require('../models/Ticket')
+const Project = require('../models/Project')
 const bodyParser = require('body-parser')
 const router = express.Router()
 
@@ -18,11 +19,25 @@ router.post('/newTicket',(req,res) => {
         created_by: info.createdBy,
         assigned_to: info.assignedTo,
         open: info.open,
-        status_text: info.statusText
+        status_text: info.statusText,
+        project_name: info.projectName
     }).save().then(() => {
         return res.send('saved')
     })
+})
 
+router.post('/newProject',(req,res) => {
+    let info = req.body
+    let now = new Date()
+
+    new Project ({
+        project_name: info.projectName,
+        organization: info.organization,
+        created_on: new Date(),
+        created_by: info.createdBy
+    }).save().then(() => {
+        return res.send('saved')
+    })
 })
 
 module.exports = router

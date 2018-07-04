@@ -3,6 +3,7 @@
 body {
     margin: 0;
     background-color: $almost-white;
+    color: #333;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -118,6 +119,12 @@ header {
     font-size: 16px;
     border-radius: 3px;
     border: 0;
+    cursor: pointer;
+
+    &:hover {
+        opacity: .7;
+    }
+    
 }
 
 .button-wrap {
@@ -145,10 +152,29 @@ header {
     .reopen-button {
         background: $light-gray;
     }
+
+    .back-button {
+        background: $bright-yellow;
+    }
     
     .edit-button {
         background: $open-green;
     }
+}
+
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.project {
+    text-align: center;
+    margin: 10px;
+    padding: 20px;
+    width: 300px;
+    border: 1px solid #333;
+    background: white;
 }
 
 #new-status-text {

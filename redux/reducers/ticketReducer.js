@@ -5,6 +5,7 @@ export const UPDATE_TICKET_STATE = 'ticketReducer/UPDATE_TICKET_STATE'
 
 let initialState = {
     ticketData: [],
+    projectData: [],
     ticketStatus: []
 }
 
@@ -18,7 +19,8 @@ export default (state = initialState, action) => {
         case GET_TICKET_DATA:
         return {
             ...state,
-            ticketData: action.payload
+            ticketData: action.payload,
+            projectData: action.payload2
         }
         case UPDATE_TICKET_STATE:
         return {
@@ -38,15 +40,25 @@ export const setTicketData = data => {
 }
 
 export const getTicketData = () => {
+    let x=[];
+    let y=[]
     return dispatch => {
     fetch('/api/issues/apitestproject')
     .then( res => res.json())
     .then( data => {     
-            let x = data.sort((a,b) => {
+            x = data.sort((a,b) => {
                 return new Date(b['updated_on']) - new Date(a['updated_on'])
             })
-            dispatch({type: GET_TICKET_DATA, payload: data})
-        })    
+        
+        fetch('/api/issues/all-projects')
+        .then( res => res.json())
+        .then( data => {     
+                y = data.sort((a,b) => {
+                    return new Date(b['updated_on']) - new Date(a['updated_on'])
+                })
+                dispatch({type: GET_TICKET_DATA, payload: x, payload2: y})
+            })   
+        }) 
     }
 }
 

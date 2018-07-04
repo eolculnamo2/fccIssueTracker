@@ -12,7 +12,8 @@ class NewTicket extends React.Component {
             createdBy: document.getElementById('createdBy').value,
             assignedTo: document.getElementById('assignedTo').value,
             open: document.getElementById('open').value,
-            statusText: document.getElementById('statusText').value
+            statusText: document.getElementById('statusText').value,
+            projectName: document.getElementById('projectName').value.trim().toLowerCase()
         }
 
         fetch('/posts/newTicket',{
@@ -30,27 +31,39 @@ class NewTicket extends React.Component {
             <div>
                 <form className="new-ticket-form">
                     <label>
-                    <h4>Title</h4>
+                        <h4>Project Name</h4>
+                    </label>
+                    <select id="projectName">
+                        {this.props.projectData.map( x => {
+                            return (
+                                <option value = {x.project_name}>
+                                    {x.project_name}
+                                </option>
+                            )
+                        })}
+                    </select>
+                    <label>
+                        <h4>Ticket Title</h4>
                     </label>
                     <input id='title' />
 
                     <label>
-                    <h4>Text</h4>
+                        <h4>Text</h4>
                     </label>
                     <input id='text'/>
 
                     <label>
-                    <h4>Created By</h4>
+                        <h4>Created By</h4>
                     </label>
                     <input id='createdBy'/>
 
                     <label>
-                    <h4>Assigned To</h4>
+                        <h4>Assigned To</h4>
                     </label>
                     <input id='assignedTo' />
 
                     <label>
-                    <h4>Open/Closed</h4>
+                        <h4>Open/Closed</h4>
                     </label>
                     <select id='open'>
                         <option value={true}>
@@ -62,7 +75,7 @@ class NewTicket extends React.Component {
                     </select>
 
                     <label>
-                    <h4>Status Text</h4>
+                        <h4>Status Text</h4>
                     </label>
                     <input id='statusText' />
 
@@ -77,7 +90,8 @@ class NewTicket extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    ticketData: state.ticketReducer.ticketData
+    ticketData: state.ticketReducer.ticketData,
+    projectData: state.ticketReducer.projectData
 })
 
 const mapDispatchToProps = dispatch =>{

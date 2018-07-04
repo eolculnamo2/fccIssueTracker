@@ -13,7 +13,7 @@ class ProjectsPage extends React.Component {
         return(
             <div>
                 <h2 className="page-heading">
-                    Project
+                    Projects
                 </h2>
                 <div className="projects-container">
                     {this.props.projectData.map( project => {

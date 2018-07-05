@@ -28,8 +28,8 @@ class App extends React.Component {
                 <header>
                     <div className="links">
                         <Link to='/'><span>Home</span></Link>
-                        <Link to='/new-project'><span>New Project</span></Link>
                         <Link to='/new-ticket'><span>New Ticket</span></Link>
+                        <Link to='/new-project'><span>New Project</span></Link>
                         <Link to='/view-tickets'><span>View Projects</span></Link>
                     </div>
                 </header>

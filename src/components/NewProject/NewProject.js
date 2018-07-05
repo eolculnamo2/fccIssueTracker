@@ -8,6 +8,7 @@ class NewProject extends React.Component {
         let payload = {
             projectName: document.getElementById('projectName').value,
             organization: document.getElementById('organization').value,
+            repo: document.getElementById('repo').value,
             createdBy: document.getElementById('createdBy').value
         }
         fetch('/posts/newProject',{
@@ -35,6 +36,10 @@ class NewProject extends React.Component {
                         <h4>Organization</h4>
                     </label>
                     <input id='organization' />
+                    <label>
+                        <h4>Repository Link</h4>
+                    </label>
+                    <input id='repo' />
                     <label>
                         <h4>Created By</h4>
                     </label>

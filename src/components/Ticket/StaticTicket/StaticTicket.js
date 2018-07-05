@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import '../../../scss/main.scss'
 //props.data['key']
-const StaticTicket = (props) => {
+const StaticTicket = props => {
         return (
             <div className={props.data['open'] ? "a-ticket" : "a-ticket a-ticket--closed"}>
                 <div className="ticket-header">

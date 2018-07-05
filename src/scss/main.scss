@@ -14,7 +14,6 @@ a, a:active, a:visited {
 
 a:hover {
     color: $light-blue;
-    text-decoration: underline;
 }
 
 //default inputs
@@ -55,6 +54,27 @@ header {
 
 .home-page-box {
     padding: 30px;
+}
+
+.option-box {
+    width: 300px;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #333;
+    border-radius: 3px;
+    background: white;
+
+    img {
+        width: 50px;
+    }
+}
+
+.option-box-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+    flex-wrap: wrap;
+    text-align: center;
 }
 
 .view-tickets-box {
@@ -165,12 +185,18 @@ header {
     .edit-button {
         background: $open-green;
     }
+
+    .view-button {
+        background: $dark-blue;
+        color: white;
+    }
 }
 
 .projects-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    word-break: break-all;
 }
 
 .project {

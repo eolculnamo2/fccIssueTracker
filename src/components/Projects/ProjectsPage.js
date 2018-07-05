@@ -25,6 +25,11 @@ class ProjectsPage extends React.Component {
                                     <p>
                                         Organization: {project.organization}
                                     </p>
+                                    <p>
+                                        Repository: 
+                                        <br/>
+                                        {project.repo}
+                                    </p>
                                     <em>
                                         Created By: {project.created_by} on {moment(project.created_on).format('MMMM Do YYYY')}
                                     </em>

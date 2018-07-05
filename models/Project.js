@@ -8,6 +8,7 @@ let Project = new Schema({
     project_name: String,
     organization: String,
     created_on: String,
+    repo: String,
     created_by: String
 })
 

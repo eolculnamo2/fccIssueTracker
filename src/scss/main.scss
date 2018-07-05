@@ -90,6 +90,7 @@ header {
         justify-content: space-around;
 
         @media (max-width: 1000px) {
+            padding: 0;
             flex-direction: column;
             text-align: center;
         }
@@ -220,6 +221,7 @@ header {
     .view-button {
         background: $dark-blue;
         color: white;
+        padding: 7px 50px;
     }
 }
 

@@ -237,6 +237,9 @@ header {
     width: 300px;
     border: 1px solid #333;
     background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .form-wrap {

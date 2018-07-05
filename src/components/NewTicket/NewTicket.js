@@ -43,11 +43,13 @@ class NewTicket extends React.Component {
                     </label>
                     <select id="projectName">
                         {this.props.projectData.map( x => {
-                            return (
-                                <option value = {x.project_name}>
-                                    {x.project_name}
-                                </option>
-                            )
+                            if (x.users.indexOf(this.props.username) > -1) {
+                                return (      
+                                    <option value = {x.project_name}>
+                                        {x.project_name}
+                                    </option>
+                                )
+                            }
                         })}
                     </select>
                 </span>
@@ -107,7 +109,8 @@ class NewTicket extends React.Component {
 
 const mapStateToProps = state => ({
     ticketData: state.ticketReducer.ticketData,
-    projectData: state.ticketReducer.projectData
+    projectData: state.ticketReducer.projectData,
+    username: state.ticketReducer.username
 })
 
 const mapDispatchToProps = dispatch =>{

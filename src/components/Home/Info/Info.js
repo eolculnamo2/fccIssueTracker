@@ -7,7 +7,7 @@ const Info = () => {
                 Simple Issue Tracking Tool for Small Teams
             </h1>
             <ul>
-                <li><h3>No Login</h3></li>
+                <li><h3>User Authenticated</h3></li>
                 <li><h3>Simple Interface</h3></li>
                 <li><h3>Inline Editing</h3></li> 
             </ul>

@@ -35,6 +35,30 @@ header {
     }
 }
 
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+
+    @media (max-width: 500px) {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+.user-details {
+    display: flex;
+    text-align: right;
+
+    p {
+        margin: 0 5px;
+    }
+    @media (max-width: 500px) {
+        text-align: center;
+        flex-direction: column-reverse;
+    }
+} 
+
 .page-heading {
     padding: 20px 35px;
     border-bottom: 20px solid $dark-blue;
@@ -222,6 +246,9 @@ header {
         background: $dark-blue;
         color: white;
         padding: 7px 50px;
+        &--less-padding{
+            padding: 10px 15px;
+        }
     }
 }
 
@@ -251,6 +278,12 @@ header {
     border: 1px solid #333;
     border-radius: 3px;
     padding: 10px;
+
+    &--column {
+        form {
+            flex-direction: column;
+        }
+    }
 
     form {
         display: flex;

@@ -9,7 +9,8 @@ let Project = new Schema({
     organization: String,
     created_on: String,
     repo: String,
-    created_by: String
+    created_by: String,
+    users: Array
 })
 
 module.exports = mongoose.model('projects', Project)

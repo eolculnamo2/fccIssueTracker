@@ -17,6 +17,7 @@ class ProjectsPage extends React.Component {
                 </h2>
                 <div className="projects-container">
                     {this.props.projectData.map( project => {
+                        if (project.users.indexOf(this.props.username) > -1) {
                             return (
                                 <div className="project">
                                     <h2>
@@ -40,7 +41,8 @@ class ProjectsPage extends React.Component {
                                         </button>
                                     </div>
                                 </div>
-                            )
+                                )
+                            }
                         })             
                     }
                 </div>
@@ -51,7 +53,8 @@ class ProjectsPage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        projectData: state.ticketReducer.projectData
+        projectData: state.ticketReducer.projectData,
+        username: state.ticketReducer.username
     }
 } 
 

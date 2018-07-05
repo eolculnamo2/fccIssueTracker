@@ -35,7 +35,8 @@ router.post('/newProject',(req,res) => {
         organization: info.organization,
         created_on: new Date(),
         repo: info.repo,
-        created_by: info.createdBy
+        created_by: info.createdBy,
+        users: info.users
     }).save().then(() => {
         return res.send('saved')
     })

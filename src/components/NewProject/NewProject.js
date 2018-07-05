@@ -5,12 +5,15 @@ import { getTicketData } from  '../../../redux/reducers/ticketReducer'
 
 class NewProject extends React.Component {
     submitForm() {
+        
         let payload = {
             projectName: document.getElementById('projectName').value,
             organization: document.getElementById('organization').value,
             repo: document.getElementById('repo').value,
-            createdBy: document.getElementById('createdBy').value
+            createdBy: this.props.username,
+            users: [this.props.username]
         }
+
         fetch('/posts/newProject',{
                 method: "POST",
                 body: JSON.stringify(payload),
@@ -50,12 +53,6 @@ class NewProject extends React.Component {
                         </label>
                         <input id='repo' />
                     </span>
-                    <span>
-                        <label>
-                            <h4>Created By</h4>
-                        </label>
-                        <input id='createdBy'/>
-                    </span>
                 </form>
 
                 <button className="form-button" onClick={this.submitForm.bind(this)}>
@@ -68,7 +65,8 @@ class NewProject extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    ticketData: state.ticketReducer.ticketData
+    ticketData: state.ticketReducer.ticketData,
+    username: state.ticketReducer.username
 })
 
 const mapDispatchToProps = dispatch =>{

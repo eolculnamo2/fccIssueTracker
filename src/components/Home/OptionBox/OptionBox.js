@@ -11,7 +11,7 @@ const OptionBox = props => {
             </p>
             <img src={props.icon} />
             <div className="button-wrap">
-                <a href={props.lnk} target="_blank">
+                <a href={props.lnk}>
                     <button className="view-button">
                         {props.heading}
                     </button>

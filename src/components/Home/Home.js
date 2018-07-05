@@ -1,4 +1,5 @@
 import React from 'react'
+import Info from './Info/Info'
 import OptionBox from './OptionBox/OptionBox'
 import '../../scss/main.scss';
 
@@ -16,7 +17,7 @@ let OptionBoxes = [{
     },
     {
         heading: 'View Projects',
-        txt: "View all current projects available. Find ways to contribute.",
+        txt: 'View all current projects available. Find ways to contribute.',
         icon: 'images/settings-gears.png',
         lnk: '/view-tickets'
     }]
@@ -28,18 +29,22 @@ class Home extends React.Component {
                 <h1>
                     Free Code Camp Issue Tracker Project
                 </h1>
-                <em>Functionally similar to https://protective-garage.glitch.me/ </em>
+                <em>
+                    Functionally similar to https://protective-garage.glitch.me/
+                </em>
                 <p>
-                    View API link at <a href = "/api/issues/apitestproject">here</a>
+                    View API link <a href = "/api/issues/apitestproject">here</a>
                 </p>
-            <div className="option-box-container">
-            {OptionBoxes.map( x => {
-                return <OptionBox heading={x.heading}
-                                  txt={x.txt}
-                                  icon={x.icon}
-                                  lnk={x.lnk} />
-            })}
-            </div>
+                <Info />
+                <div className="option-box-container">
+                    {OptionBoxes.map( x => {
+                        return <OptionBox heading={x.heading}
+                                          txt={x.txt}
+                                          icon={x.icon}
+                                          lnk={x.lnk}
+                                            />
+                    })}
+                </div> 
             </div>
         )
     }

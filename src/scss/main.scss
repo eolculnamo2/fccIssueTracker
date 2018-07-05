@@ -36,8 +36,13 @@ header {
 }
 
 .page-heading {
-    text-align: center;
-    padding: 5px;
+    padding: 20px 35px;
+    border-bottom: 20px solid $dark-blue;
+    margin: 0;
+
+    @media (max-width: 1150px) {
+        text-align: center;
+    }
 }
 
 .links {
@@ -59,7 +64,7 @@ header {
 .option-box {
     width: 300px;
     padding: 20px;
-    margin: 10px;
+    margin: 10px 0;
     border: 1px solid #333;
     border-radius: 3px;
     background: white;
@@ -69,12 +74,38 @@ header {
     }
 }
 
+.info {
+    color: white;
+    background: $dark-blue;
+    padding: 20px;
+    border-radius: 3px;
+
+    h1 {
+        text-align: center;
+    }
+
+    ul {
+        list-style-type: none;
+        display: flex;
+        justify-content: space-around;
+
+        @media (max-width: 1000px) {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+}
+
 .option-box-container {
     display: flex;
-    justify-content: space-around;
-    margin: 20px;
+    justify-content: space-between;
     flex-wrap: wrap;
     text-align: center;
+    margin-top: 20px;
+
+    @media (max-width: 1000px) {
+        justify-content: space-around;
+    }
 }
 
 .view-tickets-box {
@@ -206,6 +237,39 @@ header {
     width: 300px;
     border: 1px solid #333;
     background: white;
+}
+
+.form-wrap {
+    width: 300px;
+    margin: 30px auto;
+    background: white;
+    border: 1px solid #333;
+    border-radius: 3px;
+    padding: 10px;
+
+    form {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+
+        span {
+            min-width: 125px;
+
+            input {
+                max-width: 100%;
+            }
+
+            select {
+                width: 100%;
+                text-align-last: center;
+            }
+        }
+    }
+}
+
+.form-heading {
+    text-align: center;
+    border-bottom: 3px solid #333;
 }
 
 #new-status-text {

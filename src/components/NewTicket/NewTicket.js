@@ -32,7 +32,12 @@ class NewTicket extends React.Component {
                 <h2 className="page-heading">
                     New Ticket
                 </h2>
+            <div className="form-wrap">
+                <h2 className="form-heading">
+                    New Ticket
+                </h2>
                 <form className="new-ticket-form">
+                <span>
                     <label>
                         <h4>Project Name</h4>
                     </label>
@@ -45,26 +50,32 @@ class NewTicket extends React.Component {
                             )
                         })}
                     </select>
+                </span>
+                <span>
                     <label>
                         <h4>Ticket Title</h4>
                     </label>
                     <input id='title' />
-
+                </span>
+                <span>
                     <label>
                         <h4>Text</h4>
                     </label>
                     <input id='text'/>
-
+                </span>
+                <span>
                     <label>
                         <h4>Created By</h4>
                     </label>
                     <input id='createdBy'/>
-
+                </span>
+                <span>
                     <label>
                         <h4>Assigned To</h4>
                     </label>
                     <input id='assignedTo' />
-
+                </span>
+                <span>
                     <label>
                         <h4>Open/Closed</h4>
                     </label>
@@ -76,17 +87,19 @@ class NewTicket extends React.Component {
                             Closed
                         </option>
                     </select>
-
+                </span>
+                <span>
                     <label>
                         <h4>Status Text</h4>
                     </label>
                     <input id='statusText' />
-
+                </span>
                 </form>
 
                 <button className="form-button" onClick={this.submitForm.bind(this)}>
                     Submit
                 </button>
+            </div>
             </div>
         )
     }

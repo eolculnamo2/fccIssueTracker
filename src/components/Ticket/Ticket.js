@@ -69,7 +69,7 @@ class Ticket extends React.Component {
     render() {
         return(
             <div className = "view-tickets-box">
-             <h2 className="page-heading">
+             <h2 className="form-heading">
                 {this.props.match.params.str + ' Tickets'}
             </h2>
                 <div className='ticket-box'>

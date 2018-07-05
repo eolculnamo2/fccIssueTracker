@@ -24,31 +24,44 @@ class NewProject extends React.Component {
     render() {
         return(
             <div>
-                <h2 className='page-heading'>
+                <h2 className="page-heading">
+                    New Project
+                </h2>
+            <div className="form-wrap">
+                <h2 className='form-heading'>
                     New Project
                 </h2>
                 <form className="new-ticket-form">
-                    <label>
-                        <h4>Project Name</h4>
-                    </label>
-                    <input id="projectName"/>
-                    <label>
-                        <h4>Organization</h4>
-                    </label>
-                    <input id='organization' />
-                    <label>
-                        <h4>Repository Link</h4>
-                    </label>
-                    <input id='repo' />
-                    <label>
-                        <h4>Created By</h4>
-                    </label>
-                    <input id='createdBy'/>
+                    <span>
+                        <label>
+                            <h4>Project Name</h4>
+                        </label>
+                        <input id="projectName"/>
+                    </span>
+                    <span>
+                        <label>
+                            <h4>Organization</h4>
+                        </label>
+                        <input id='organization' />
+                    </span>
+                    <span>
+                        <label>
+                            <h4>Repository Link</h4>
+                        </label>
+                        <input id='repo' />
+                    </span>
+                    <span>
+                        <label>
+                            <h4>Created By</h4>
+                        </label>
+                        <input id='createdBy'/>
+                    </span>
                 </form>
 
                 <button className="form-button" onClick={this.submitForm.bind(this)}>
                     Submit
                 </button>
+            </div>
             </div>
         )
     }

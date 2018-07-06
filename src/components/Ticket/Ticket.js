@@ -12,6 +12,46 @@ class Ticket extends React.Component {
         this.changeStatus = this.changeStatus.bind(this)
         this.updateTicket = this.updateTicket.bind(this)
         this.deleteTicket = this.deleteTicket.bind(this)
+        this.state = {
+            currentUsers: []
+        }
+    }
+
+    componentWillMount() {
+        this.getTeammates()
+    }
+    getTeammates(){
+        let payload = {
+            project: this.props.match.params.str
+        }
+
+        fetch('/posts/getTeammates',{
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: { "Content-Type": "application/json" }
+          })
+        .then( res => res.json())
+        .then( data => {
+            this.setState({currentUsers: data.users})
+        })
+    }
+    addUser() {
+        let payload = {
+            user: document.getElementById('newTeammate').value.toLowerCase(),
+            project: this.props.match.params.str
+        }
+
+        fetch('/posts/newTeammate',{
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: { "Content-Type": "application/json" }
+          })
+        .then( res => res.json())
+        .then( data => {
+            this.props.getTicketData()
+            this.getTeammates()
+            alert(data.status)
+        })
     }
 
     submitChanges(id,index) {
@@ -69,9 +109,34 @@ class Ticket extends React.Component {
     render() {
         return(
             <div className = "view-tickets-box">
-             <h2 className="form-heading">
-                {this.props.match.params.str + ' Tickets'}
-            </h2>
+                <h2 className="form-heading">
+                    {this.props.match.params.str + ' Tickets'}
+                </h2>
+                <div className="project-info-container">
+                    <div>
+                        <h4>
+                            Add User
+                        </h4>
+                        <p>
+                            Add a new teammate to this project by entering their username below.
+                        </p>
+                        <input id='newTeammate' />
+                        <div className='button-wrap button-wrap--wrap2'>
+                            <button className='view-button view-button--less-margin view-button--less-padding'
+                                    onClick={this.addUser.bind(this)}>
+                                Add Teammate
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>
+                            Current Team
+                        </h4>
+                        <ul className='user-list'>
+                            {this.state.currentUsers.map( x => <li>{x}</li>)}
+                        </ul>
+                    </div>
+                </div>
                 <div className='ticket-box'>
                    
                     {this.props.ticketData.map((x,i) => {

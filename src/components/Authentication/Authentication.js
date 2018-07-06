@@ -13,7 +13,7 @@ class Authentication extends React.Component {
     authenticate() {
         if (this.state.register) {
             let payload = {
-                username: document.getElementById('username').value,
+                username: document.getElementById('username').value.toLowerCase(),
                 email: document.getElementById('email').value,
                 password: document.getElementById('password').value,
                 confirmPassword: document.getElementById('confirm-password').value
@@ -42,7 +42,7 @@ class Authentication extends React.Component {
         }
         else {
             let payload = {
-                username: document.getElementById('username').value,
+                username: document.getElementById('username').value.toLowerCase(),
                 password: document.getElementById('password').value
             }
 

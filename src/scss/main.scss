@@ -225,6 +225,11 @@ header {
             opacity: .7;
         }
     }
+
+    &--wrap2 {
+        justify-content: flex-start;
+    }
+
     
     .close-button {
         background: $danger-red;
@@ -246,8 +251,13 @@ header {
         background: $dark-blue;
         color: white;
         padding: 7px 50px;
+
         &--less-padding{
             padding: 10px 15px;
+        }
+
+        &--less-margin {
+            margin: 10px 0;
         }
     }
 }
@@ -256,6 +266,23 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    word-break: break-all;
+}
+
+.project-info-container {
+    display: flex;
+    justify-content: space-between;
+    
+    @media (max-width: 100px) {
+        flex-direction: column
+    }
+}
+
+.user-list {
+    height: 100px;
+    overflow-y: auto;
+    list-style-type: none;
+    max-width: 200px;
     word-break: break-all;
 }
 

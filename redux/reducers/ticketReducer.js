@@ -8,7 +8,7 @@ let initialState = {
     ticketData: [],
     projectData: [],
     ticketStatus: [],
-    username: "",
+    username: null,
     loggedIn: false
 }
 

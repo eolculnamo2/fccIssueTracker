@@ -13,7 +13,8 @@ class Ticket extends React.Component {
         this.updateTicket = this.updateTicket.bind(this)
         this.deleteTicket = this.deleteTicket.bind(this)
         this.state = {
-            currentUsers: []
+            currentUsers: [],
+            loaded: false
         }
     }
 
@@ -32,9 +33,10 @@ class Ticket extends React.Component {
           })
         .then( res => res.json())
         .then( data => {
-            this.setState({currentUsers: data.users})
+            this.setState({currentUsers: data.users},() => setTimeout(()=>{this.setState({loaded:true})},250))
         })
     }
+
     addUser() {
         let payload = {
             user: document.getElementById('newTeammate').value.toLowerCase(),
@@ -58,6 +60,7 @@ class Ticket extends React.Component {
         let payload = {
             id: id,
             assignedTo: document.getElementById('new-assigned-to').value,
+            assignedBy: this.props.username,
             open: document.getElementById('open').value,
             newStatus: document.getElementById('new-status-text').value
         }
@@ -107,72 +110,88 @@ class Ticket extends React.Component {
     }
     
     render() {
-        return(
-            <div className = "view-tickets-box">
-                <h2 className="form-heading">
-                    {this.props.match.params.str + ' Tickets'}
-                </h2>
-                <div className="project-info-container">
-                    <div>
-                        <h4>
-                            Add User
-                        </h4>
-                        <p>
-                            Add a new teammate to this project by entering their username below.
-                        </p>
-                        <input id='newTeammate' />
-                        <div className='button-wrap button-wrap--wrap2'>
-                            <button className='view-button view-button--less-margin view-button--less-padding'
-                                    onClick={this.addUser.bind(this)}>
-                                Add Teammate
-                            </button>
+        if(this.state.currentUsers.indexOf(this.props.username) > -1) {
+            return(
+                <div className = "view-tickets-box">
+                    <h2 className="form-heading">
+                        {this.props.match.params.str + ' Tickets'}
+                    </h2>
+                    <div className="project-info-container">
+                        <div className="add-user">
+                            <h4>
+                                Add User
+                            </h4>
+                            <p>
+                                Add a new teammate to this project by entering their username below.
+                            </p>
+                            <input id='newTeammate' />
+                            <div className='button-wrap button-wrap--wrap2'>
+                                <button className='view-button view-button--less-margin view-button--less-padding'
+                                        onClick={this.addUser.bind(this)}>
+                                    Add Teammate
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <h4>
+                                Current Team
+                            </h4>
+                            <ul className='user-list'>
+                                {this.state.currentUsers.map( x => <li>{x}</li>)}
+                            </ul>
                         </div>
                     </div>
-                    <div>
-                        <h4>
-                            Current Team
-                        </h4>
-                        <ul className='user-list'>
-                            {this.state.currentUsers.map( x => <li>{x}</li>)}
-                        </ul>
+                    <div className='ticket-box'>
+                    
+                        {this.props.ticketData.map((x,i) => {
+                            if(x.project_name.toLowerCase() == this.props.match.params.str.toLowerCase()) {
+                                if (this.props.ticketStatus[i]) {
+                                    return (
+                                        <StaticTicket data ={x}
+                                                    changeStatus={this.changeStatus}
+                                                    updateTicket={this.updateTicket}
+                                                    index={i}
+                                                    id={x['_id']}
+                                                    status={true}/>
+                                    )       
+                                }
+                                else {
+                                    return (
+                                        <EditTicket data ={x}
+                                                    deleteTicket={this.deleteTicket}
+                                                    submitChanges={this.submitChanges}
+                                                    changeStatus={this.changeStatus}
+                                                    updateTicket={this.updateTicket}
+                                                    users={this.state.currentUsers}
+                                                    index={i}
+                                                    id={x['_id']}
+                                                    status={false}/>
+                                    ) 
+                                }
+                            }
+                        })}
                     </div>
                 </div>
-                <div className='ticket-box'>
-                   
-                    {this.props.ticketData.map((x,i) => {
-                        if(x.project_name.toLowerCase() == this.props.match.params.str.toLowerCase()) {
-                            if (this.props.ticketStatus[i]) {
-                                return (
-                                    <StaticTicket data ={x}
-                                                changeStatus={this.changeStatus}
-                                                updateTicket={this.updateTicket}
-                                                index={i}
-                                                id={x['_id']}
-                                                status={true}/>
-                                )       
-                            }
-                            else {
-                                return (
-                                    <EditTicket data ={x}
-                                                deleteTicket={this.deleteTicket}
-                                                submitChanges={this.submitChanges}
-                                                changeStatus={this.changeStatus}
-                                                updateTicket={this.updateTicket}
-                                                index={i}
-                                                id={x['_id']}
-                                                status={false}/>
-                                ) 
-                            }
-                        }
-                    })}
+            )
+        }
+        else if (this.state.loaded) {
+            return(
+                <div>
+                    <h1>
+                    Only Team Members can View/Edit this Ticket.
+                    </h1>
                 </div>
-            </div>
-        )
+            )
+        }
+        else {
+            return (<div></div>)
+        }
     }
 }
 const mapStateToProps = state => ({
         ticketData: state.ticketReducer.ticketData,
-        ticketStatus: state.ticketReducer.ticketStatus
+        ticketStatus: state.ticketReducer.ticketStatus,
+        username: state.ticketReducer.username
     })
 
 const mapDispatchToProps = dispatch =>{

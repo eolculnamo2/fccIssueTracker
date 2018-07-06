@@ -26,6 +26,7 @@ router.post('/issues/submit-changes',(req,res) => {
     {$set: 
             {
                 'assigned_to': req.body.assignedTo,
+                'assigned_by': req.body.assignedBy,
                 'open': req.body.open,
                 'status_text':req.body.newStatus,
                 'updated_on': new Date()

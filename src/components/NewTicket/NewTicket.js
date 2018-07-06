@@ -24,6 +24,7 @@ class NewTicket extends React.Component {
                 .then( () => {
                     this.props.getTicketData()
                     alert("New Ticket Added. Click View Projects and select your project to see your Ticket.")
+                    window.location.pathname='/view-tickets/'
                 })
     }
     render() {
@@ -69,7 +70,7 @@ class NewTicket extends React.Component {
                     <label>
                         <h4>Created By</h4>
                     </label>
-                    <input id='createdBy'/>
+                    <input style={{'background': '#efefef'}} value={this.props.username} id='createdBy' disabled/>
                 </span>
                 <span>
                     <label>

@@ -22,6 +22,7 @@ class NewProject extends React.Component {
                 .then( () => {
                     this.props.getTicketData()
                     alert("Project has been Created. Go to view projects to see the project")
+                    window.location.pathname='/view-tickets/'
                 })
     }
     render() {

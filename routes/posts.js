@@ -19,6 +19,7 @@ router.post('/newTicket',(req,res) => {
         updated_on: now,
         created_by: info.createdBy,
         assigned_to: info.assignedTo,
+        assigned_by: info.createdBy,
         open: info.open,
         status_text: info.statusText,
         project_name: info.projectName

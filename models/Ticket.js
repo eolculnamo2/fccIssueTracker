@@ -17,6 +17,7 @@ let Ticket = new Schema({
     updated_on: String,
     created_by: String,
     assigned_to: String,
+    assigned_by: String,
     open: Boolean,
     status_text: String,
     project_name: String

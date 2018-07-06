@@ -28,10 +28,22 @@ const EditTicket = props => {
                     Created By: <span>{props.data['created_by']}</span>
                 </div>
                 <div>
-                    Assigned To: <input id="new-assigned-to"/>
+                    Assigned To: 
+                    <select id="new-assigned-to">
+                        {props.users.map( x => {
+                            return(
+                                <option value={x}>
+                                    {x}
+                                </option>
+                            )
+                        })}
+                    </select>
                 </div>
             </div>
             <div className="ticket-info">
+                <div>
+                    Assigned By: {data.assigned_by}
+                </div>
                 <div>  
                     Status: <select id ="open">
                                 <option value={true}>

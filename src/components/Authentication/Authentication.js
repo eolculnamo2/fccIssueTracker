@@ -10,6 +10,13 @@ class Authentication extends React.Component {
             register: false
         }
     }
+    componentDidMount() {
+        window.addEventListener('keyup', e => {
+            if (e.keyCode === 13 || e.which === 13) {
+                this.authenticate()
+            }
+        })
+    }
     authenticate() {
         if (this.state.register) {
             let payload = {

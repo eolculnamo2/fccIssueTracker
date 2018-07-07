@@ -25,6 +25,9 @@ class NewProject extends React.Component {
                     window.location.pathname='/view-tickets/'
                 })
     }
+    showAlert() {
+        alert("Must be logged in to create a new project.")
+    }
     render() {
         return(
             <div>
@@ -56,7 +59,8 @@ class NewProject extends React.Component {
                     </span>
                 </form>
 
-                <button className="form-button" onClick={this.submitForm.bind(this)}>
+                <button className="form-button"
+                 onClick={this.props.username !== null && this.props.username !== '' ? this.submitForm.bind(this) : this.showAlert.bind(this)}>
                     Submit
                 </button>
             </div>

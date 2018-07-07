@@ -3,6 +3,7 @@ const Ticket = require('../models/Ticket')
 const User = require('../models/User')
 const Project = require('../models/Project')
 const bodyParser = require('body-parser')
+const mailer = require('../services/mailer')
 const router = express.Router()
 
 router.use(bodyParser.json());
@@ -24,7 +25,11 @@ router.post('/newTicket',(req,res) => {
         status_text: info.statusText,
         project_name: info.projectName
     }).save().then(() => {
-        return res.send('saved')
+        User.findOne({username: info.assignedTo},(err,response) => {
+            console.log(response.email)
+            mailer.ticketUpdate(response.email, info.assignedTo, info.title)
+            return res.send('saved')
+        })
     })
 })
 

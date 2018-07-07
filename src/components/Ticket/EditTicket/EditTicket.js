@@ -42,7 +42,7 @@ const EditTicket = props => {
             </div>
             <div className="ticket-info">
                 <div>
-                    Assigned By: {data.assigned_by}
+                    Assigned By: <span>{props.data.assigned_by}</span>
                 </div>
                 <div>  
                     Status: <select id ="open">

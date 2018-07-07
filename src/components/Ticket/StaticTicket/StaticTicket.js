@@ -32,6 +32,9 @@ const StaticTicket = props => {
                     </div>
                 </div>
                 <div className="ticket-info">
+                    <div>
+                        Assigned By: <span>{props.data.assigned_by}</span>
+                    </div>
                     <div>  
                         Status: <span>{props.data['open'] == true ? 'Open' : 'Closed'}</span>
                     </div>

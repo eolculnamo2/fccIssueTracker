@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Link, Route, withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route, withRouter, Redirect } from 'react-router-dom'
 import { connect } from  'react-redux'
 import { bindActionCreators } from 'redux'
 import { setTicketData, updateTicketState, getTicketData } from '../redux/reducers/ticketReducer'

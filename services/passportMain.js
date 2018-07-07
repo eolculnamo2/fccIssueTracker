@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const router = express.Router()
 const Strategy = require('passport-local').Strategy
-
+const mailer = require('./mailer')
 //models
 const User = require('../models/User');
 
@@ -31,6 +31,7 @@ router.post('/register', (req, res) => {
         }
         else{
         passport.authenticate('local')(req, res, () => {
+            mailer.welcomeUser(req.body.email, req.body.username)
             res.send({name: 'authenticated', user: req.user.username})
         })
         }

@@ -9,6 +9,7 @@ class ProjectsPage extends React.Component {
     goToTickets(projectName) {
         window.location.pathname='/show-tickets/'+projectName
     }
+
     render() {
         return(
             <div>

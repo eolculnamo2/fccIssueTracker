@@ -3,6 +3,8 @@ const router = express.Router()
 const bodyParser = require('body-parser')
 const Ticket = require('../models/Ticket')
 const Project = require('../models/Project')
+const User = require('../models/User')
+const mailer = require('../services/mailer')
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
@@ -33,7 +35,16 @@ router.post('/issues/submit-changes',(req,res) => {
             }
     },
     (err, response) => {
-        err ? console.log("Submit Changes Error") : res.send("changes saved")
+        if(err) {
+            console.log("Submit Changes Error")
+        }
+        else {
+            User.findOne({username: req.body.assignedTo},(err,response2) => {
+                console.log(response2.email)
+                mailer.ticketUpdate(response2.email, req.body.assignedTo, response.issue_title)
+                return res.send('saved')
+            })
+        }
     })
 })
 

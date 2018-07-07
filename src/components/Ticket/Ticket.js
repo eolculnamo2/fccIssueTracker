@@ -21,6 +21,7 @@ class Ticket extends React.Component {
     componentWillMount() {
         this.getTeammates()
     }
+
     getTeammates(){
         let payload = {
             project: this.props.match.params.str
@@ -142,12 +143,11 @@ class Ticket extends React.Component {
                         </div>
                     </div>
                     <div className='ticket-box'>
-                    
                         {this.props.ticketData.map((x,i) => {
                             if(x.project_name.toLowerCase() == this.props.match.params.str.toLowerCase()) {
                                 if (this.props.ticketStatus[i]) {
                                     return (
-                                        <StaticTicket data ={x}
+                                        <StaticTicket data={x}
                                                     changeStatus={this.changeStatus}
                                                     updateTicket={this.updateTicket}
                                                     index={i}
@@ -157,7 +157,7 @@ class Ticket extends React.Component {
                                 }
                                 else {
                                     return (
-                                        <EditTicket data ={x}
+                                        <EditTicket data={x}
                                                     deleteTicket={this.deleteTicket}
                                                     submitChanges={this.submitChanges}
                                                     changeStatus={this.changeStatus}

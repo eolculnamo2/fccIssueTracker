@@ -57,7 +57,7 @@ class Authentication extends React.Component {
                     if(data.name === 'authenticated') {
                         alert("Login Successful.")
                         this.props.setUserStatus(data.user, true)
-                       window.location.pathname='/view-tickets/'
+                        window.location.pathname='/view-tickets/'
                     }
                     else {
                         alert('Did not authenticate. Please try again.')

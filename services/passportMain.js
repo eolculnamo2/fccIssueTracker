@@ -21,18 +21,18 @@ passport.deserializeUser(User.deserializeUser());
 router.post('/register', (req, res) => {
   if(req.body.password === req.body.confirmPassword){
     User.register(new User({
-                             username : req.body.username,
-                             email: req.body.email,
+                             username : req.body.username.trim(),
+                             email: req.body.email.trim(),
                              projects: [],
-                             }), req.body.password, (err, account) => {
+                             }), req.body.password.trim(), (err, account) => {
         if (err) {
-            console.log(err)
-            res.send(err)
+            console.log(err.message)
+            res.send(err.message)
         }
         else{
         passport.authenticate('local')(req, res, () => {
             mailer.welcomeUser(req.body.email, req.body.username)
-            res.send({name: 'authenticated', user: req.user.username})
+            res.send({name: 'authenticated', user: req.user.username.trim()})
         })
         }
     })
@@ -44,16 +44,16 @@ router.post('/register', (req, res) => {
 
 //Login
 router.post('/login', passport.authenticate('local'),(req, res) => {
-  if(req.user){
-      res.send({
-        name: 'authenticated',
-        user: req.user.username
-      })
-  }
-  else{
+  if (!req.user) {
     res.send({
       name: 'invalid-credentials'
     })
+  }
+  else if (req.user) {
+      res.send({
+        name: 'authenticated',
+        user: req.user.username.trim()
+      })
   }
 })
 
@@ -65,7 +65,7 @@ router.get('/logout',(req,res) => {
 
 router.post('/checkLogin',(req,res) => {
   if(req.user){
-    res.json({name: true, user: req.user.username})
+    res.json({name: true, user: req.user.username.trim()})
   }
   else if(!req.user){
     res.json({name: false})

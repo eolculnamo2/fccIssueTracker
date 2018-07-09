@@ -20,10 +20,10 @@ class Authentication extends React.Component {
     authenticate() {
         if (this.state.register) {
             let payload = {
-                username: document.getElementById('username').value.toLowerCase(),
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value,
-                confirmPassword: document.getElementById('confirm-password').value
+                username: document.getElementById('username').value.toLowerCase().trim(),
+                email: document.getElementById('email').value.trim(),
+                password: document.getElementById('password').value.trim(),
+                confirmPassword: document.getElementById('confirm-password').value.trim()
             }
 
             fetch('/authenticate/register',{
@@ -49,8 +49,8 @@ class Authentication extends React.Component {
         }
         else {
             let payload = {
-                username: document.getElementById('username').value.toLowerCase(),
-                password: document.getElementById('password').value
+                username: document.getElementById('username').value.toLowerCase().trim(),
+                password: document.getElementById('password').value.trim()
             }
 
             fetch('/authenticate/login',{
@@ -59,15 +59,19 @@ class Authentication extends React.Component {
                 headers: { "Content-Type": "application/json" },
                 credentials: "same-origin"
                 })
-                .then( res => res.json())
+                .then( res => {
+                    if(res.status == 401) {
+                        alert('Did not authenticate. Please try again.')
+                    }
+                    else {
+                        return res.json()
+                    }
+                })
                 .then( data => {
                     if(data.name === 'authenticated') {
                         alert("Login Successful.")
                         this.props.setUserStatus(data.user, true)
                         window.location.pathname='/view-tickets/'
-                    }
-                    else {
-                        alert('Did not authenticate. Please try again.')
                     }
                 })
 

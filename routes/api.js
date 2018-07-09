@@ -23,6 +23,12 @@ router.get('/issues/all-projects',(req,res) => {
     })
 })
 
+router.post('/issues/get-projects',(req,res) => {
+    Project.findOne({project_name: req.body.projectName},(err,response) => {
+        res.send(response)
+    })
+})
+
 router.post('/issues/submit-changes',(req,res) => {
     Ticket.findOneAndUpdate({_id: req.body.id},
     {$set: 
@@ -40,7 +46,6 @@ router.post('/issues/submit-changes',(req,res) => {
         }
         else {
             User.findOne({username: req.body.assignedTo},(err,response2) => {
-                console.log(response2.email)
                 mailer.ticketUpdate(response2.email, req.body.assignedTo, response.issue_title)
                 return res.send('saved')
             })

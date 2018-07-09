@@ -14,16 +14,16 @@ router.post('/newTicket',(req,res) => {
     let now = new Date()
 
     new Ticket ({
-        issue_title: info.title,
-        issue_text: info.text,
+        issue_title: info.title.trim(),
+        issue_text: info.text.trim(),
         created_on: now,
         updated_on: now,
         created_by: info.createdBy,
         assigned_to: info.assignedTo,
         assigned_by: info.createdBy,
         open: info.open,
-        status_text: info.statusText,
-        project_name: info.projectName
+        status_text: info.statusText.trim(),
+        project_name: info.projectName.trim()
     }).save().then(() => {
         User.findOne({username: info.assignedTo},(err,response) => {
             console.log(response.email)
@@ -38,11 +38,11 @@ router.post('/newProject',(req,res) => {
     let now = new Date()
 
     new Project ({
-        project_name: info.projectName,
-        organization: info.organization,
+        project_name: info.projectName.trim(),
+        organization: info.organization.trim(),
         created_on: new Date(),
-        repo: info.repo,
-        created_by: info.createdBy,
+        repo: info.repo.trim(),
+        created_by: info.createdBy.trim(),
         users: info.users
     }).save().then(() => {
         return res.send('saved')
@@ -53,17 +53,17 @@ router.post('/newTeammate', (req,res) => {
 
     Project.findOne({project_name: req.body.project}, (err,response) => {
         for(x of response.users) {
-            if (x == req.body.user) {
+            if (x == req.body.user.trim()) {
                 return res.send({status: "User is already on team"})
             }
         }
 
-        User.findOne({username: req.body.user}, (err,response) => {
+        User.findOne({username: req.body.user.trim()}, (err,response) => {
             if (response == undefined) {
                 return res.send({status: "Username does not match an existing user. Please try again."})
             }
 
-            Project.findOneAndUpdate({project_name: req.body.project}, {$push: {users: req.body.user}}, (err,response2) => {
+            Project.findOneAndUpdate({project_name: req.body.project}, {$push: {users: req.body.user.trim()}}, (err,response2) => {
                 if(err) {
                     return res.send({status: "Error. User not added. Please try again"})
                 }

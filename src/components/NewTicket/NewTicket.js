@@ -4,6 +4,15 @@ import { bindActionCreators } from 'redux'
 import { getTicketData } from  '../../../redux/reducers/ticketReducer'
 
 class NewTicket extends React.Component {
+    componentDidMount() {
+        let pn = document.getElementById('projectName').value
+        this.watchProjectSelection(pn)
+        
+        document.getElementById('projectName').addEventListener('change', () => {
+            pn = document.getElementById('projectName').value
+            this.watchProjectSelection(pn)
+        })
+    }
     submitForm() {
     
         let payload = {
@@ -30,6 +39,25 @@ class NewTicket extends React.Component {
     showAlert() {
         alert("Must be logged in to create a new ticket.")
     }
+
+    watchProjectSelection(projectName) {
+        let payload = {projectName: projectName}
+
+        document.getElementById('assignedTo').innerHTML = ''
+
+        fetch('/api/issues/get-projects',{
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: { "Content-Type": "application/json" }
+            })
+            .then( res => res.json() )
+            .then( data => {
+                data.users.forEach( x => {
+                    document.getElementById('assignedTo').innerHTML += '<option value ='+x+'>'+x+'</option>'
+                })
+            })
+        }
+
     render() {
         return(
             <div>
@@ -79,7 +107,8 @@ class NewTicket extends React.Component {
                     <label>
                         <h4>Assigned To</h4>
                     </label>
-                    <input id='assignedTo' />
+                    <select id='assignedTo'>
+                    </select>
                 </span>
                 <span>
                     <label>

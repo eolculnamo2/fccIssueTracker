@@ -30,7 +30,7 @@ class Home extends React.Component {
                     Issue Tracker
                 </h1>
                 <p>
-                    View API link <a href = "/api/issues/apitestproject">here</a>
+                    Simplify Development
                 </p>
                 <Info />
                 <div className="option-box-container">

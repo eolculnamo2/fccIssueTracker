@@ -23,10 +23,37 @@ class App extends React.Component {
            this.props.getTicketData()
        }) 
    }
+   componentDidMount() {
+       window.addEventListener('click', e => {
+           if (window.innerWidth < 501) {
+                if (e.target.id === 'arrow') {
+                    document.getElementsByClassName('links')[0].style.display = 'flex'
+                    document.getElementsByClassName('user-details')[0].style.display = 'flex' 
+                }
+                else {
+                    document.getElementsByClassName('links')[0].style.display = 'none'
+                    document.getElementsByClassName('user-details')[0].style.display = 'none' 
+                }
+            }
+       })
+
+       window.addEventListener('resize', () => {
+            if (window.innerWidth < 501) {
+                document.getElementsByClassName('links')[0].style.display = 'none'
+                document.getElementsByClassName('user-details')[0].style.display = 'none'
+            }
+            else {
+                document.getElementsByClassName('links')[0].style.display = 'flex'
+                document.getElementsByClassName('user-details')[0].style.display = 'flex'
+            }
+       })
+   }
     render(){
         return(
             <div>
                 <header>
+                    <div id="arrow" class="down-arrow">
+                    </div>
                     <div className="nav-bar">
                         <div className="links">
                             <Link to='/'><span>Home</span></Link>

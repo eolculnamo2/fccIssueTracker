@@ -27,11 +27,8 @@ class Home extends React.Component {
         return(
             <div className="home-page-box">
                 <h1>
-                    Free Code Camp Issue Tracker Project
+                    Issue Tracker
                 </h1>
-                <em>
-                    Functionally similar to https://protective-garage.glitch.me/
-                </em>
                 <p>
                     View API link <a href = "/api/issues/apitestproject">here</a>
                 </p>

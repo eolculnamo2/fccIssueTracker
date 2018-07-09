@@ -36,6 +36,15 @@ header {
     }
 }
 
+#arrow-wrapper {
+    margin: auto;
+    padding: 5px 10px;
+    cursor: pointer;
+    @media (min-width: 500px) {
+        display: none;
+    }
+}
+
 .down-arrow {
     color: white;
     border: 10px solid white;
@@ -46,7 +55,6 @@ header {
     width: 10px;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
-    cursor: pointer;
 
     &:hover {
         color: $light-blue;

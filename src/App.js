@@ -26,33 +26,41 @@ class App extends React.Component {
    componentDidMount() {
        window.addEventListener('click', e => {
            if (window.innerWidth < 501) {
-                if (e.target.id === 'arrow') {
-                    document.getElementsByClassName('links')[0].style.display = 'flex'
-                    document.getElementsByClassName('user-details')[0].style.display = 'flex' 
+                if (e.target.id === 'arrow-wrapper') {
+                    this.menuVisible(true) 
                 }
                 else {
-                    document.getElementsByClassName('links')[0].style.display = 'none'
-                    document.getElementsByClassName('user-details')[0].style.display = 'none' 
+                    this.menuVisible(false)
                 }
             }
        })
 
        window.addEventListener('resize', () => {
             if (window.innerWidth < 501) {
-                document.getElementsByClassName('links')[0].style.display = 'none'
-                document.getElementsByClassName('user-details')[0].style.display = 'none'
+                this.menuVisible(false)
             }
             else {
-                document.getElementsByClassName('links')[0].style.display = 'flex'
-                document.getElementsByClassName('user-details')[0].style.display = 'flex'
+                this.menuVisible(true)
             }
        })
+   }
+   menuVisible(show) {
+       if(show === true) {
+            document.getElementsByClassName('links')[0].style.display = 'flex'
+            document.getElementsByClassName('user-details')[0].style.display = 'flex'
+       }
+       else {
+            document.getElementsByClassName('links')[0].style.display = 'none'
+            document.getElementsByClassName('user-details')[0].style.display = 'none'
+       }
    }
     render(){
         return(
             <div>
                 <header>
-                    <div id="arrow" class="down-arrow">
+                    <div id="arrow-wrapper">
+                        <div className="down-arrow">
+                        </div>
                     </div>
                     <div className="nav-bar">
                         <div className="links">

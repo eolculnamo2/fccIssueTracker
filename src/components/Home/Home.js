@@ -26,7 +26,7 @@ class Home extends React.Component {
     render() { 
         return(
             <div className="home-page-box">
-                <h1>
+                <h1 className="title-background">
                     Issue Tracker
                 </h1>
                 <p>

@@ -3,7 +3,7 @@
 body {
     margin: 0;
     background-color: $almost-white;
-    color: #333;
+    color: $dark;
     font-family: $font2;
 }
 
@@ -97,7 +97,7 @@ header {
         text-align: center;
         flex-direction: column-reverse;
         animation-name: slide;
-        animation-duration: 1s;
+        animation-duration: .5s;
         animation-iteration-count: 1;
     }
 } 
@@ -120,7 +120,7 @@ header {
 
     @media (max-width: 500px) {
         animation-name: slide;
-        animation-duration: 1s;
+        animation-duration: .5s;
         animation-iteration-count: 1;
     }
 
@@ -136,7 +136,7 @@ header {
     padding: 30px;
 
     h1 {
-        margin-top: 30px;
+        margin-top: 20px;
         margin-bottom: 0;
         font-weight: 600;
     }
@@ -146,11 +146,20 @@ header {
     }
 }
 
+.title-background {
+    width: 225px;
+    padding: 10px 22px;
+    border-radius: 17px;
+    margin: auto;
+    border: 1px solid $dark;
+    background: white;
+}
+
 .option-box {
     width: 300px;
     padding: 5px;
     margin: 10px 0;
-    border: 1px solid #333;
+    border: 1px solid $dark;
     border-radius: 3px;
     background: white;
     display: flex;
@@ -223,7 +232,7 @@ header {
 
 .a-ticket {
     margin: 30px 0;
-    border: 1px solid #333;
+    border: 1px solid $dark;
     border-radius: 3px;
 
     &--closed {
@@ -252,7 +261,7 @@ header {
 }
 
 .ticket-status-text {
-    border-top: 1px solid #333;
+    border-top: 1px solid $dark;
     margin: 5px 50px;
     padding: 7px;
 
@@ -366,7 +375,7 @@ header {
     margin: 10px;
     padding: 20px;
     width: 300px;
-    border: 1px solid #333;
+    border: 1px solid $dark;
     background: white;
     display: flex;
     flex-direction: column;
@@ -377,7 +386,7 @@ header {
     width: 300px;
     margin: 30px auto;
     background: white;
-    border: 1px solid #333;
+    border: 1px solid $dark;
     border-radius: 3px;
     padding: 10px;
 
@@ -409,7 +418,7 @@ header {
 
 .form-heading {
     text-align: center;
-    border-bottom: 3px solid #333;
+    border-bottom: 3px solid $dark;
 }
 
 #new-status-text {
